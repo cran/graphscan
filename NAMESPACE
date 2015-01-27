@@ -1,0 +1,19 @@
+useDynLib(graphscan)
+
+import(ape)
+import(sp)
+import(snowfall)
+import(methods)
+import(rgl)
+
+exportPattern("^[[:alpha:]]+")
+
+# fonction S4
+exportClasses(graphscan)
+exportMethods(graphscan_1d,graphscan_nd)
+exportMethods(cluster)
+exportMethods(graphscan_plot)
+exportMethods(print,show)
+
+# fonction S3
+export(barplot)
