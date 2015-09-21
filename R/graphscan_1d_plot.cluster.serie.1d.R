@@ -1,5 +1,5 @@
 # ---------------------------------------------------------------
-# graphscan : version 0.1
+# graphscan : version 1.1
 # fonction plot_pop_cluster_1d 
 # fonction pour tracer les positions des clusters positifs et 
 # négatifs pour un ensemble de séries d'évènement

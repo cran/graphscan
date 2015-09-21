@@ -1,5 +1,5 @@
 // ** ================================================================================================================
-// ** R-Package: graphscan
+// ** R-Package: graphscan 1.1
 // ** Fichier : src/qsort_elem.h
 // ** Description : dernière version de la fonction quicksort.
 // ** URL : http://www.eglibc.org/cgi-bin/viewvc.cgi/trunk/libc/stdlib/qsort.c

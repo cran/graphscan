@@ -1,5 +1,5 @@
 // ** ================================================================================================================
-// ** R-Package: graphscan
+// ** R-Package: graphscan 1.1
 // ** Fichier : src/rbtree.c
 // ** Description : Création et manipulations des arbres rouges-noirs.
 // **               Modifications, simplifications et optimisation pour du calcul haute performance.

@@ -1,5 +1,5 @@
 # ---------------------------------------------------------------
-# graphscan : version 0.1
+# graphscan : version 1.1
 # fonction barplot_cluster_length_1d 
 # fonction pour tracer la distribution des longeurs des clusters
 # création : 17/12/13

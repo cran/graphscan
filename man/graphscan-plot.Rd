@@ -34,28 +34,30 @@ Maintainer: David Abrial <graphscan@clermont.inra.fr>}
 
 \seealso{barplot}
 
-\examples{# 1D example:
-	\dontrun{
-		data(woodmouse)
-		g1<-graphscan_1d(data=woodmouse)
-		g1<-cluster(g1)
-		graphscan_plot(g1,events_series=3)
-		dev.new()
-		graphscan_plot(g1,events_series="all")
+\examples{
+\dontrun{
+# 1D example:
+require(ape)
+data(woodmouse)
+g1<-graphscan_1d(data=woodmouse)
+g1<-cluster(g1)
+graphscan_plot(g1,events_series=3)
+dev.new()
+graphscan_plot(g1,events_series="all")
 
-		# 2D example:
-		data(france_two_clusters)
-		g2<-graphscan_nd(data=france_two_clusters)
-		g2<-cluster(g2)
-		graphscan_plot(g2,map=france)
+# 2D example:
+data(france_two_clusters)
+g2<-graphscan_nd(data=france_two_clusters)
+g2<-cluster(g2)
+graphscan_plot(g2,map=france)
 
-		# 3D example:
-		data(sample3d)
-		g3<-graphscan_nd(data=sample3d)
-		g3<-cluster(g3)
-		graphscan_plot(g3,projection=TRUE) # 2D plot
-		graphscan_plot(g3) # 3D plot
-	}
+# 3D example:
+data(sample3d)
+g3<-graphscan_nd(data=sample3d)
+g3<-cluster(g3)
+graphscan_plot(g3,projection=TRUE) # 2D plot
+graphscan_plot(g3) # 3D plot
+}
 }
 
 \keyword{spatial}

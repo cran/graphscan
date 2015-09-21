@@ -1,5 +1,5 @@
 // ** ================================================================================================================
-// ** R-Package: graphscan
+// ** R-Package: graphscan 1.1
 // ** Fichier : src/2D_detection_cluster.c
 // ** Description : détection 2D et 3D des clusters avec l'indice de Cucala et celui de Kulldorff.
 // ** License : GPL-2 | GPL-3

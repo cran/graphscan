@@ -1,5 +1,5 @@
 # ---------------------------------------------------------------
-# graphscan : version 0.1
+# graphscan : version 1.1
 # fonction plot_pop_cluster_1d 
 # fonction pour tracer les fréquences d'apparition 
 # des mutations pour toutes les positions 
@@ -74,9 +74,10 @@
   {
     if(discrete)
     {
-	id<-x[1]:x[2]
-	indice[id+1]<<-indice[id+1]+x[3]
-	frequence[id+1]<<-frequence[id+1]+1
+	id<-x[1]:x[2] # ensemble des positions sur le vecteur concernées 
+	              # les positions détectées sont comprises entre 0 et 1 donc il faut augmenter de +1
+	indice[id+1]<<-indice[id+1]+x[3]    # incrémenter l'indice de cucala pour l'ensemble des positions
+	frequence[id+1]<<-frequence[id+1]+1 # nombre d'indice pour pour l'ensemble des positions
     } else
     {
 	id<-position>=x[1] & position<=x[2]
@@ -87,12 +88,13 @@
     return(list(indice,frequence))
   }
     
-  
   # appliquer la fonction 'extraire_position' sur 'res_pos' 
   indice<-rep(0,times=nb_position)    # vecteur indice de cucala en chaque positions
   frequence<-rep(0,times=nb_position) # vecteur fréquence des clusters en chaque positions  
-  if(nrow(res_pos)>0) aa<-apply(res_pos,MARGIN=1,FUN=extraire_position)
-  indice_pos<-indice/frequence
+  if(nrow(res_pos)>0) aa<-apply(res_pos,MARGIN=1,FUN=extraire_position)      
+  denominateur<-frequence         # denominateur pour calculer la moyenne des indices en chaque position 
+  denominateur[indice==0]<-1      # si aucun cluster en une position on divisera par 1 et non par zéro
+  indice_pos<-indice/denominateur # indice_pos est une moyenne par position
   frequence_pos<-frequence
   position_pos<-position
   
@@ -100,12 +102,14 @@
   indice<-rep(0,times=nb_position)    # vecteur indice de cucala en chaque positions
   frequence<-rep(0,times=nb_position) # vecteur fréquence des clusters en chaque positions  
   if(nrow(res_neg)>0)aa<-apply(res_neg,MARGIN=1,FUN=extraire_position)
-  indice_neg<-indice/frequence
+  denominateur<-frequence         # denominateur pour calculer la moyenne des indices en chaque position 
+  denominateur[indice==0]<-1      # si aucun cluster en une position on divisera par 1 et non par zéro
+  indice_neg<-indice/denominateur # indice_neg est une moyenne par position
   frequence_neg<-frequence 
   position_neg<-position
   
   # éliminer les points chevauchants : plus de points en une position
-  # que de séries d'évènements
+  # que de séries d'évènements (nb)
   id<-frequence_pos<=nb
   position_pos<-position_pos[id]
   frequence_pos<-frequence_pos[id]
@@ -142,6 +146,10 @@
       indice_neg[is.na(indice_neg)]<-0     
   }  
   
+  # nombre final de positions : remise à jour
+  nb_position_pos<-length(position_pos)
+  nb_position_neg<-length(position_neg)
+  
   # -------------------------------------
   # éliminer NaN et infinis pour les indices
   # -------------------------------------
@@ -156,13 +164,68 @@
   # -------------------------------------
   # couleurs des barres
   # -------------------------------------  
-  palette<-colorRampPalette(colors=c("green","yellow","red"))(200)
+  palette<-colorRampPalette(colors=c("green","yellow","red"))(50)
+
+  if(length(unique(indice_pos))>1)
+  {
+    # vérifier si le rapport entre min et max de l'indice est >10^2 (chercher une différence significative)  
+    indice<-range(indice_pos[indice_pos>0])
+    if(indice[2]/indice[1]<10^2) 
+    {
+	couleur_pos<-rep("green",times=nb_position_pos) # vecteur des couleurs
+	log_pos<-NULL # ne pas tracer de légende
+    }
+    else
+    {
+	id<-indice_pos>0 # une couleur dans la palette que pour les positions avec cluster
+	couleur_pos<-rep("white",times=nb_position_pos) # vecteur des couleurs
+	# essayer avec une classification linéaire
+	couleur<-as.character(cut(indice_pos[id],breaks=50,include.lowest=T,labels=palette))
+	nb_classe<-length(table(couleur))
+	log_pos<-0 # indicatrice pour échelle non log
+	
+	# si moins de 5 classes passer en classification log
+	if(nb_classe<5)
+	{
+	  couleur<-as.character(cut(log(indice_pos[id]),breaks=50,include.lowest=T,labels=palette))
+	  nb_classe<-length(table(couleur))
+	  log_pos<-1 # indicatrice pour échelle log
+	}
+	couleur_pos[id]<-couleur
+    }
+  } 
   
-  if(length(unique(indice_pos))>1) 
-    couleur_pos<-as.character(cut(indice_pos,breaks=200,include.lowest=T,labels=palette))
-    
+  
   if(length(unique(indice_neg))>1)
-    couleur_neg<-as.character(cut(indice_neg,breaks=200,include.lowest=T,labels=palette))
+  {
+    # vérifier si le rapport entre min et max de l'indice est >10^2 (chercher une différence significative)  
+    indice<-range(indice_neg[indice_neg>0])
+    if(indice[2]/indice[1]<10^2) 
+    {
+	couleur_neg<-rep("green",times=nb_position_neg) # vecteur des couleurs
+	exp_neg<-NULL # ne pas tracer de légende
+    }
+    else
+    {
+	id<-indice_neg>0 # une couleur dans la palette que pour les positions avec cluster
+	couleur_neg<-rep("white",times=nb_position_neg) # vecteur des couleurs
+	# essayer avec une classification linéaire
+	couleur<-as.character(cut(indice_neg[id],breaks=50,include.lowest=T,labels=palette))
+	nb_classe<-length(table(couleur))
+	exp_neg<-0 # indicatrice pour échelle non exp
+      
+	# si moins de 5 classes passer en classification exp
+	if(nb_classe<5)
+	{
+	  couleur<-as.character(cut(exp(indice_neg[id]),breaks=50,include.lowest=T,labels=palette))
+	  nb_classe<-length(table(couleur))
+	  exp_neg<-1 # indicatrice pour échelle exp
+	}
+	couleur_neg[id]<-couleur
+    }
+    
+    
+  } 
    
   # -------------------------------------
   # tracé des graphiques
@@ -192,21 +255,25 @@
       title(main=titre,xlab="positions",ylab="frequencies",font.main = 4)
 
       # ajout de la légende
-      palette_legende<-colorRampPalette(colors=c("green","yellow","red"))(20)
-      
-      xx1<-0.75*n[2]
-      xx2<-xx1+n[2]*0.08 
-      yy1<-1.05+(0:19)*0.015
-      yy2<-yy1+0.015
-      rect(xx1,yy1,xx2,yy2,col=palette_legende,border=NA)
-      rect(xx1,yy1[1],xx2,yy2[20],col=NA,border="black")
+      if(!is.null(log_pos))
+      {
+	    palette_legende<-colorRampPalette(colors=c("green","yellow","red"))(20)
+	    if(log_pos==1) palette_legende<-colorRampPalette(colors=c("green","yellow","red"),bias=0.5)(20)
+	    
+	    xx1<-0.75*n[2]
+	    xx2<-xx1+n[2]*0.08 
+	    yy1<-1.05+(0:19)*0.015
+	    yy2<-yy1+0.015
+	    rect(xx1,yy1,xx2,yy2,col=palette_legende,border=NA)
+	    rect(xx1,yy1[1],xx2,yy2[20],col=NA,border="black")
 
-      xx<-xx2+n[2]*0.0005
-      txt1<-format(min(indice_pos),digits=3)
-      txt2<-format(max(indice_pos),digits=3)
-      texte_legende<-c(txt1,txt2)
-      coord<-xy.coords(x=c(xx,xx),y=c(yy1[2],yy1[19])) # positions des labels
-      text(coord,labels=texte_legende,cex=1.1,pos=4)
+	    xx<-xx2+n[2]*0.0005
+	    txt1<-format(min(indice_pos[indice_pos>0]),digits=3)
+	    txt2<-format(max(indice_pos[indice_pos>0]),digits=3)
+	    texte_legende<-c(txt1,txt2)
+	    coord<-xy.coords(x=c(xx,xx),y=c(yy1[2],yy1[19])) # positions des labels
+	    text(coord,labels=texte_legende,cex=1.1,pos=4)
+      }
   }
    
   
@@ -229,21 +296,25 @@
       title(main=titre,xlab="positions",ylab="frequencies",font.main = 4)
 
       # ajout de la légende
-      palette_legende<-colorRampPalette(colors=c("green","yellow","red"))(20)
-      
-      xx1<-0.75*n[2]
-      xx2<-xx1+n[2]*0.08 
-      yy1<-1.05+(0:19)*0.015
-      yy2<-yy1+0.015
-      rect(xx1,yy1,xx2,yy2,col=palette_legende,border=NA)
-      rect(xx1,yy1[1],xx2,yy2[20],col=NA,border="black")
+      if(!is.null(exp_neg))
+      {
+	  palette_legende<-colorRampPalette(colors=c("green","yellow","red"))(20)
+	  if(exp_neg==1) palette_legende<-colorRampPalette(colors=c("green","yellow","red"),bias=2)(20)     
+	  
+	  xx1<-0.75*n[2]
+	  xx2<-xx1+n[2]*0.08 
+	  yy1<-1.05+(0:19)*0.015
+	  yy2<-yy1+0.015
+	  rect(xx1,yy1,xx2,yy2,col=palette_legende,border=NA)
+	  rect(xx1,yy1[1],xx2,yy2[20],col=NA,border="black")
 
-      xx<-xx2+n[2]*0.0005
-      txt1<-format(-min(indice_neg),digits=3)
-      txt2<-format(-max(indice_neg),digits=3)
-      texte_legende<-c(txt1,txt2)
-      coord<-xy.coords(x=c(xx,xx),y=c(yy1[2],yy1[19])) # positions des labels
-      text(coord,labels=texte_legende,cex=1.1,pos=4)
+	  xx<-xx2+n[2]*0.0005
+	  txt1<-format(-min(indice_neg[indice_neg>0]),digits=3)
+	  txt2<-format(-max(indice_neg[indice_neg>0]),digits=3)
+	  texte_legende<-c(txt1,txt2)
+	  coord<-xy.coords(x=c(xx,xx),y=c(yy1[2],yy1[19])) # positions des labels
+	  text(coord,labels=texte_legende,cex=1.1,pos=4)
+      }
   }
   
 }

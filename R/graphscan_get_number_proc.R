@@ -1,5 +1,5 @@
 # ---------------------------------------------------------------
-# graphscan : version 0.1
+# graphscan : version 1.1
 # fonction graphscan_get_number_proc
 # récupérer le nombre de processeurs sur la machine
 # création : 16/01/2015

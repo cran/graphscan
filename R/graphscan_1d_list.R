@@ -1,5 +1,5 @@
 # ---------------------------------------------------------------
-# graphscan : version 0.1
+# graphscan : version 1.1
 # fonction graphscan_1d : création des objets de classe graphscan 
 # fonction pour data contenant une liste de vecteurs de positions d'évènement
 # création : 06/11/13

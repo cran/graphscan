@@ -1,5 +1,5 @@
 // ** ================================================================================================================
-// ** R-Package: graphscan
+// ** R-Package: graphscan 1.1
 // ** Fichier : src/unif_aleat.h
 // ** Description : Génération uniforme de nombre aléatoire
 // **               Modification de la fonction R pour la rendre thread-safe.

@@ -70,6 +70,7 @@ g1<-graphscan_1d(data=dna_file)
 g2<-graphscan_1d(data=dna_file,events_series=list(1:2,3:4))
 
 # example with 'DNABin' class object :
+require(ape)
 data(woodmouse)
 g3<-graphscan_1d(data=woodmouse)
 

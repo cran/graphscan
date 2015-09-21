@@ -1,5 +1,5 @@
 # ---------------------------------------------------------------
-# graphscan : version 0.1
+# graphscan : version 1.1
 # fonction plot.cluster.3d 
 # fonction pour tracer les clusters 3d avec une projection en 2d
 # 

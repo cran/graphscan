@@ -1,5 +1,5 @@
 # ---------------------------------------------------------------
-# graphscan : version 0.1
+# graphscan : version 1.1
 # fonction graphscan_1d : création des objets de classe graphscan 
 # fonction générique et vérifications des paramètres
 #

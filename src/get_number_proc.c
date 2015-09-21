@@ -1,5 +1,5 @@
 // ** ================================================================================================================
-// ** R-Package: graphscan
+// ** R-Package: graphscan 1.1
 // ** Fichier : src/get_number_proc.c
 // ** Description : renvoie le nombre de processeurs (threads) disponibles sur la machine.
 // ** License : GPL-2 | GPL-3

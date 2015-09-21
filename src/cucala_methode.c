@@ -1,5 +1,5 @@
 // ** ================================================================================================================
-// ** R-Package: graphscan
+// ** R-Package: graphscan 1.1
 // ** Fichier : src/detection_dagregat.h
 // ** Description : détection 1D des clusters avec l'indice de Cucala et celui de Kulldorff. 
 // ** License : GPL-2 | GPL-3
@@ -32,7 +32,7 @@ int nbEv, long double * vecteur_D)
 	agregat_potentiel_indice_cucala_t resultat;
 	long double distance_min;
 	long double beta_min = 1;
-	long double * vecteur_T= malloc((nbEv-1)*sizeof(long double));
+	long double * vecteur_T = malloc((nbEv-1)*sizeof(long double));
 	
  	if( vecteur_T == NULL )   // si l'allocation échoue
  	{
@@ -183,8 +183,8 @@ double calcul_p_valeur_positif(int nbEv, int nbsim, long double indice_cucala)
 			// Tirage aléatoire d'évènements
 			for(j=0;j<nbEv+2;++j)
 			{
-				var_sim[i] = unif_aleat_generer(seed);	// génère entre [0,1)
-				if(var_sim[i]==0.0)
+				var_sim[j] = unif_aleat_generer(seed);	// génère entre [0,1)
+				if(var_sim[j]==0.0)
 					j--;	// Si on génère pile un 0, on refait le tirage (chance très faible d'arriver)
 			}
 
@@ -250,8 +250,8 @@ double calcul_p_valeur_negatif(int nbEv, int nbsim, long double indice_cucala)
 			// Tirage aléatoire d'évènements
 			for(j=0;j<nbEv+2;++j)
 			{
-				var_sim[i] = unif_aleat_generer(seed);	// génère entre [0,1)
-				if(var_sim[i]==0.0)
+				var_sim[j] = unif_aleat_generer(seed);	// génère entre [0,1)
+				if(var_sim[j]==0.0)
 					j--;	// Si on génère pile un 0, on refait le tirage (chance très faible d'arriver)
 			}
 
@@ -278,14 +278,14 @@ double calcul_p_valeur_negatif(int nbEv, int nbsim, long double indice_cucala)
 			#pragma omp critical
 			{
 				if(agregat_negatif.indice_cucala <= indice_cucala)
-					p_val_min =p_val_min +1 ;
+					p_val_min = p_val_min +1 ;
 			}
 			free(vecteur_D);
 			free(var_sim);
 		}
 		free(seed);
 	}
-	p_val_min =p_val_min/(nbsim+1);
+	p_val_min = p_val_min/(nbsim+1);
 	return p_val_min;
 }
 
@@ -304,7 +304,7 @@ void calcul_p_valeur_negatif_positif(int nbEv, int nbsim, long double indice_cuc
 {
 	*p_val_max =1.0;
 	*p_val_min =1.0;
-	
+		
 	#pragma omp parallel shared(p_val_max,p_val_min)
 	{
 		// Initialisation de la génération aléatoire
@@ -312,7 +312,7 @@ void calcul_p_valeur_negatif_positif(int nbEv, int nbsim, long double indice_cuc
 		agregat_potentiel_indice_cucala_t agregat_negatif;
 		agregat_potentiel_indice_cucala_t agregat_positif;
 		int i,j;
-
+	
 		#pragma omp for
 		for(i=0;i<nbsim;i++)
 		{
@@ -329,8 +329,8 @@ void calcul_p_valeur_negatif_positif(int nbEv, int nbsim, long double indice_cuc
 			// Tirage aléatoire d'évènements
 			for(j=0;j<nbEv+2;++j)
 			{
-				var_sim[i] = unif_aleat_generer(seed);	// génère entre [0,1)
-				if(var_sim[i]==0.0)
+				var_sim[j] = unif_aleat_generer(seed);	// génère entre [0,1)
+				if(var_sim[j]==0.0)
 					j--;	// Si on génère pile un 0, on refait le tirage (chance très faible d'arriver)
 			}
 
@@ -351,17 +351,17 @@ void calcul_p_valeur_negatif_positif(int nbEv, int nbsim, long double indice_cuc
 			#pragma omp critical
 			{
 				if(agregat_negatif.indice_cucala <= indice_cucala_neg)
-					*p_val_min =*p_val_min +1 ;
+					*p_val_min = *p_val_min +1 ;
 				if(agregat_positif.indice_cucala >= indice_cucala_pos)
-					*p_val_max =*p_val_max +1 ;
-			}
+					*p_val_max = *p_val_max +1 ;
+			}	
 			free(vecteur_D);
-			free(var_sim);
-		}
+			free(var_sim);				
+		}	
 		free(seed);
 	}
-	*p_val_min =*p_val_min/(nbsim+1);
-	*p_val_max =*p_val_max/(nbsim+1);
+	*p_val_min = *p_val_min/(nbsim+1);
+	*p_val_max = *p_val_max/(nbsim+1);	
 }
 
 /** fonction compare_doubles()

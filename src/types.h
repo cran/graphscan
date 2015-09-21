@@ -1,5 +1,5 @@
 // ** ================================================================================================================
-// ** R-Package: graphscan
+// ** R-Package: graphscan 1.1
 // ** Fichier : src/types.h
 // ** Description : contient les structures utilisées par les fonctions.
 // ** License : GPL-2 | GPL-3

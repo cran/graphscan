@@ -1,5 +1,5 @@
 # ---------------------------------------------------------------
-# graphscan : version 0.1
+# graphscan : version 1.1
 # fonction cluster_1d_array_treatment : traitement du tableau de résultat 1d 
 # renvoie : un tableau de données brutes, un tableau de données traitées (prise ne compte des
 # des clusters inclus dans les autres et donc du découpage en segements) et d'un tableau de
@@ -244,7 +244,7 @@
 	  if(length(list_k)>1)
 	  {
 	      # initialisation pour nb_proc processeurs
-	      sfInit(parallel=TRUE,cpus=nb_proc)
+	      sfInit(parallel=TRUE,cpus=nb_proc,socketHosts=NULL)
 	      # exporter la matrice resultat aux processeurs
 	      sfExport("resultat")
 	      # executions de la fonction calcul_segment

@@ -1,5 +1,5 @@
 # ---------------------------------------------------------------
-# graphscan : version 0.1
+# graphscan : version 1.1
 # fonction graphscan_plot 
 # fonction générale pour tracer clusters 1d et nd
 #

@@ -1,5 +1,5 @@
 # ---------------------------------------------------------------
-# graphscan : version 1.0
+# graphscan : version 1.1
 # définition de la classe graphscan
 # fonction 'print' pour afficher les informations d'un objet de classe graphscan
 #

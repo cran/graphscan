@@ -1,11 +1,15 @@
 useDynLib(graphscan)
 
-import(ape)
-import(sp)
-import(snowfall)
 import(methods)
-import(rgl)
-
+importFrom("rgl","open3d","bg3d","points3d","spheres3d","axes3d","title3d")
+importFrom("ape","read.dna")
+importFrom("snowfall","sfInit","sfLapply","sfStop","sfExport")
+importFrom("sp","plot","SpatialPointsDataFrame")
+importFrom("grDevices","colorRampPalette","dev.new","xy.coords")
+importFrom("graphics","axis","hist","lines","par","plot.new","plot.window","points","polygon","rect","text","title")
+importFrom("stats","quantile")
+importFrom("utils","combn","head")
+     
 exportPattern("^[[:alpha:]]+")
 
 # fonction S4
@@ -17,3 +21,4 @@ exportMethods(print,show)
 
 # fonction S3
 export(barplot)
+

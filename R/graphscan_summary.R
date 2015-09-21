@@ -1,5 +1,5 @@
 # ---------------------------------------------------------------
-# graphscan : version 0.1
+# graphscan : version 1.1
 # fonctions résumé des objets graphscan
 #
 # création   : 18/06/14

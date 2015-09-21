@@ -1,5 +1,5 @@
 // ** ================================================================================================================
-// ** R-Package: graphscan
+// ** R-Package: graphscan 1.1
 // ** Fichier : src/fonction_math.c
 // ** Description : détection 1D des clusters avec l'indice de Cucala et celui de Kulldorff.
 // **               fonction de normalisation, fonction de calcul d'ordre et fonction beta.
@@ -8,7 +8,7 @@
 // ** ================================================================================================================
 
 #include "fonction_math.h"
-#include <gsl/gsl_rng.h>
+//#include <gsl/gsl_rng.h>
 #include <time.h>
 #ifdef _OPENMP
 	#include <omp.h>

@@ -1,5 +1,5 @@
 // ** ================================================================================================================
-// ** R-Package: graphscan
+// ** R-Package: graphscan 1.1
 // ** Fichier : src/detection_dagregat.c
 // ** Description : détection 1D des clusters avec l'indice de Cucala et celui de Kulldorff.
 // ** License : GPL-2 | GPL-3
@@ -57,7 +57,6 @@ SEXP detection_multiple_dagregat(SEXP nbEv_r,
 	long double * tab_P ;
 	long double * vecteur_D;
 	int i;
-	
 
 	SEXP sortie;
 	int nb_colonne = 0; // nombre de resultat trouvé 
@@ -73,7 +72,6 @@ SEXP detection_multiple_dagregat(SEXP nbEv_r,
 	int choix_detection = INTEGER_VALUE(choix_detection_r);
 	int choix_type_agregat = INTEGER_VALUE(choix_type_agregat_r);
 
-	
 	resultat_t * result;
 	
 	list_t *list_head = malloc(sizeof(list_t));
@@ -93,13 +91,14 @@ SEXP detection_multiple_dagregat(SEXP nbEv_r,
  	{
 	  error("Allocation error for tab_P in detection_agregat.c");     //on affiche un message d'erreur
  	}
-	
+
 	// utiliser le nombre maximum de thread, soit le nombre de coeurs.
 	#ifdef _OPENMP
 		omp_set_num_threads(omp_get_num_procs());
 	#endif
 		
 	normalisation_et_distance_entre_stat_dordre(normalisation_debut,normalisation_fin,nbEv,vecteur_X,vecteur_D,tab_P);
+
 	switch(choix_detection)
 	{
 		case 1 : // detection multiple des agregats positif
@@ -197,8 +196,7 @@ SEXP detection_multiple_dagregat(SEXP nbEv_r,
 				long double position4 =0; // position du dernier element pour l'agregat negatif
 				double p_val_min; // p valeur pour l'agregat negatif
 				agregat_potentiel_indice_cucala_t agregat_negatif;
-				
-				
+						
 				bool fin = false;
 				
 				while(fin == false && nbEv>1)
@@ -210,11 +208,13 @@ SEXP detection_multiple_dagregat(SEXP nbEv_r,
 						//detection d'un agregat negatif potentiel et calcul de son indice de cucala
 						agregat_negatif = calcul_agregat_negatif_et_indice_cucala(nbEv,vecteur_D);
 						calcul_p_valeur_negatif_positif(nbEv,nbSim,agregat_positif.indice_cucala,agregat_negatif.indice_cucala,&p_val_min, &p_val_max);
+						
 						position1= tab_P[agregat_positif.indice_debut];
 						position2= tab_P[agregat_positif.indice_fin];
 						
 						position3= tab_P[agregat_negatif.indice_debut];
 						position4= tab_P[agregat_negatif.indice_fin];
+						
 						// les deux agregats sont significatifs
 						if(p_val_max <= alpha/2 && p_val_min <= alpha/2)
 						{
@@ -248,7 +248,7 @@ SEXP detection_multiple_dagregat(SEXP nbEv_r,
 								result->id_agregat = list_head->taille;
 								add_resultat(list_head,result);
 							}
-							else //les deux agregat sont autant significatif l'un que l'autre
+							else //les deux agregats sont autant significatif l'un que l'autre
 							{
 								long double difference_taille_agregat;
 								double D_pos=0;
@@ -377,6 +377,7 @@ SEXP detection_multiple_dagregat(SEXP nbEv_r,
 			}
 	}
 	nb_colonne = list_head->taille;
+	
 	//renvoie une matrice de tout les resultat
 	PROTECT(sortie = allocMatrix(REALSXP,nb_ligne,nb_colonne));
 

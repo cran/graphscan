@@ -10,10 +10,11 @@ Multiple scan statistic with variable window for one dimension data and scan sta
 \tabular{ll}{
 Package: \tab graphscan\cr
 Type: \tab Package\cr
-Version: \tab 0.1\cr
-Date: \tab 2013-10-23\cr
+Version: \tab 1.1\cr
+Date: \tab 2015-09-18\cr
 License: \tab GPL-2 | GPL-3\cr
-Depends: \tab R (>= 3.0.2), ape, sp, methods, snowfall, rgl\cr
+Depends: \tab R (>= 3.0.2), snowfall (>= 1.84-6)\cr
+Imports: ape, sp, methods, rgl, utils, graphics, grDevices, stats\cr
 NeedsCompilation: \tab yes\cr
 Packaged: \tab 2014-05-07 07:44:19 UTC\cr
 Built: \tab R 3.0.2; x86_64-pc-linux-gnu; 2014-05-07 07:44:20 UTC; unix\cr

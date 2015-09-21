@@ -1,5 +1,5 @@
 # ---------------------------------------------------------------
-# graphscan : version 0.1
+# graphscan : version 1.1
 # fonction graphscan_nd : création des objets de classe graphscan 
 # en dimension 2d, 3d ou 4d 
 # création : 16/12/13

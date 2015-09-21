@@ -1,9 +1,9 @@
 # ---------------------------------------------------------------
-# graphscan : version 0.1
+# graphscan : version 1.1
 # fonctions cluster, .cluster_1d, .cluster_nd
 # lancer les programmes C pour lancer les analyses de détection
 # création : 23/10/13
-# version du : 04/11/13
+# version du : 18/09/18
 # Unité Epidémiologie Animale (UR346)
 # Auteurs : Robin Loche, Benoit Giron, David Abrial, Lionel Cucala, Myriam Charras-Garrido, Jocelyn De-Goer
 # ---------------------------------------------------------------
@@ -89,9 +89,7 @@ definition=function(gr,n_simulation=gr@param$n_simulation,cluster_analysis=gr@pa
 	    # dans le cas de détection des clusters positifs et negatif en même temps cluster_analysis='both'
 	    # dans le cas de deux agregats, un positif et un négatif, autant significatif l'un que l'autre
 	    # choix du type de cluster
-	    choix_type_agregat<-match("negative",c("negative","positive","random")) # codage numérique 1, 2, 3.
-	    
-	    
+	    choix_type_agregat<-match(gr@param$cluster_user_choice,c("negative","positive","random")) # codage numérique 1, 2, 3.
 	    
 	    # --------------------------------------------------------------------------------
 	    # exécuter la recherche de cluster par la fonction C  'detection_multiple_dagregat'
