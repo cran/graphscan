@@ -10,34 +10,27 @@ Multiple scan statistic with variable window for one dimension data and scan sta
 \tabular{ll}{
 Package: \tab graphscan\cr
 Type: \tab Package\cr
-Version: \tab 1.1\cr
-Date: \tab 2015-09-18\cr
+Version: \tab 1.1.1\cr
+Date: \tab 2016-10-11\cr
 License: \tab GPL-2 | GPL-3\cr
 Depends: \tab R (>= 3.0.2), snowfall (>= 1.84-6)\cr
 Imports: ape, sp, methods, rgl, utils, graphics, grDevices, stats\cr
 NeedsCompilation: \tab yes\cr
-Packaged: \tab 2014-05-07 07:44:19 UTC\cr
-Built: \tab R 3.0.2; x86_64-pc-linux-gnu; 2014-05-07 07:44:20 UTC; unix\cr
 }
 
 Index:
-\preformatted{
-cluster                 Performs cluster analysis on 'graphscan' class object.
-events_series           A 1D cluster example: events series example.
-france_two_clusters     A 2D cluster example: France with two clusters.
-graphscan-class         Class '"graphscan"'
-graphscan-package       Cluster detection with hypothesis free scan
-                        statistic.
-graphscan_1d            Creates objects of class 'graphscan' using 1D
-                        data.
-graphscan_nd            Creates objects of class 'graphscan' using 2D or
-                        3D data.
-barplot                 Barplot of the 1D clusters lengths.
-graphscan_plot          Plot clusters localisations or the 1D events
-                        distributions.
-sample3d                A 3D cluster example.
-summary                 Summary for graphscan objects.
-
+\tabular{ll}{
+cluster \tab Performs cluster analysis on 'graphscan' class object.\cr
+events_series \tab A 1D cluster example: events series example.\cr
+france_two_clusters \tab A 2D cluster example: France with two clusters.\cr
+graphscan-class \tab Class '"graphscan"'\cr
+graphscan-package \tab Cluster detection with hypothesis free scan statistic.\cr
+graphscan_1d \tab Creates objects of class 'graphscan' using 1D data.\cr
+graphscan_nd \tab Creates objects of class 'graphscan' using 2D or 3D data.\cr
+barplot \tab Barplot of the 1D clusters lengths.\cr
+graphscan_plot \tab Plot clusters localisations or the 1D events distributions.\cr
+sample3d \tab A 3D cluster example.\cr
+summary \tab Summary for graphscan objects.\cr
 }
 
 This package implements a statistical method for detecting clusters in dimensions 1, 2 and 3 proposed by Cucala (2008,2009). 

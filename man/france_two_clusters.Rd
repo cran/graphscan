@@ -14,7 +14,9 @@
 \examples{
 data(france_two_clusters)
 sp::plot(france)
-points(france_two_clusters[france_two_clusters$cases==1,],pch=16,col="red")
-points(france_two_clusters[france_two_clusters$cases==0,],pch=16,cex=0.2,col="green")
+points(france_two_clusters[france_two_clusters$cases==1,],
+pch=16,col="red")
+points(france_two_clusters[france_two_clusters$cases==0,],
+pch=16,cex=0.2,col="green")
 }
 \keyword{datasets}

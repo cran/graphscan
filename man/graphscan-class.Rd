@@ -10,7 +10,8 @@
 \title{Class \code{"graphscan"}}
 \description{Class of graphscan objects used to store data, parameters and results of cluster analysis with the method of Cucala.}
 \section{Objects from the Class}{
-Objects can be created by calls of the form \code{"graphscan_1d(data, ...)"} or \code{"graphscan_nd(data, ...)"}.}
+Objects can be created by calls of the form \code{"graphscan_1d(data, ...)"}\cr 
+or \code{"graphscan_nd(data, ...)"}.}
 
 \section{Slots}{
   \describe{
@@ -23,8 +24,8 @@ Objects can be created by calls of the form \code{"graphscan_1d(data, ...)"} or 
 \section{Methods}{
   \describe{
     \item{cluster}{\code{signature(gr = "graphscan")}: performed the cluster analysis. }
-    \item{barplot}{\code{signature(x = "graphscan")}: draw an barplot of the length of clusters in multiple events series analysis. }
-    \item{graphscan_plot}{\code{signature(x = "graphscan")}: plot clusters localisations or the 1D events distributions.. }
+    \item{barplot}{\code{signature(x = "graphscan")}: draw an barplot of the length of clusters \cr in multiple events series analysis. }
+    \item{graphscan_plot}{\code{signature(x = "graphscan")}: plot clusters localisations or \cr the 1D events distributions. }
     \item{print}{\code{signature(x = "graphscan")}: print informations about a graphscan object.}
     \item{show}{\code{signature(object = "graphscan")}: print informations about a graphscan object. }
     \item{summary}{\code{signature(object = "graphscan")}: summary for graphscan objects. }

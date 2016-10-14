@@ -4,7 +4,8 @@
 \description{
 This function performs cluster detections for both 'graphscan_1d' and 'graphscan_nd' objects. For 'graphscan_nd' objects both Kulldorff and Cucala indices are computed.
 }
-\usage{cluster(gr, n_simulation = NULL, cluster_analysis = NULL, memory_size = 2000)}
+\usage{cluster(gr, n_simulation = NULL, cluster_analysis = NULL,
+memory_size = 2000)}
 
 \arguments{
   \item{gr}{an object of class graphscan.}
@@ -36,7 +37,8 @@ Maintainer: David Abrial <graphscan@clermont.inra.fr>}
 
 \examples{
 \dontrun{
-# 1d example with 2 fasta format files containing each 2 DNA aligned sequences.
+# 1d example with 2 fasta format files 
+# containing each 2 DNA aligned sequences.
 dna_file<-list.files(path=system.file("extdata",package="graphscan"),
                      pattern="fna",full.names=TRUE)
 g1<-graphscan_1d(data=dna_file)

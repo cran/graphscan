@@ -16,7 +16,8 @@
 
 \examples{
 data(events_series)
-g1<-graphscan_1d(data=events_series,normalisation_factor=normalisation_factor)
+g1<-graphscan_1d(data=events_series,
+normalisation_factor=normalisation_factor)
 }
 \keyword{datasets}
 

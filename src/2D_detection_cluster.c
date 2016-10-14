@@ -202,12 +202,16 @@ SEXP detection_cluster(SEXP nb_point_r,
 		// Calcul du nombre de simulations possibles vu la quantité de mémoire à utiliser
 		nb_simulations_parallelles = (int)floor(memory_size*1000000/(double)(taille_simulation)); // memory_size est en mo
 
-		if(nb_simulations_parallelles<=0)
-			error("\nERROR: unable to do the simulations: not enough memory (try to increase 'memory_size' parameter, actually to %d) - terminating\n", memory_size);
+		// Quand pas assez de mémoire, on essaie quand même de faire tourner le programme avec un seul thread mais en affichant un warning.
+		if(nb_simulations_parallelles<=0){
+			warning("\nWARNING: simulations may fail: not enough memory (if problems, try to decrease the number of thread, or to increase the 'memory_size' parameter, actually to %d mb)\n", memory_size);
+			nb_simulations_parallelles = 1;
+		}
 		if(nb_simulations_parallelles>nb_proc)
 			nb_simulations_parallelles = nb_proc;
+		Rprintf("Maximum number of threads to do the simulation: %d , using a total estimated of %d mb in the worst case scenario.\n\n", nb_simulations_parallelles, (unsigned int)(taille_simulation*nb_simulations_parallelles)/1000000);
 	}
-	Rprintf("Maximum number of threads to do the simulation: %d , using maximum %d mb.\n\n", nb_simulations_parallelles, memory_size);
+	
 
 	// On définit le nombre de threads parallèles à exécuter
 	omp_set_num_threads(nb_simulations_parallelles);
@@ -218,6 +222,8 @@ SEXP detection_cluster(SEXP nb_point_r,
 	double p_valeur_cucala = 1.0;
 	// Variable pour pouvoir afficher correctement l'avancement du programme
 	ID_TYPE suivi_simulation = 0;
+	// Variables temps (en secondes depuis 1970) qui va servir à initialiser les graines aléatoires
+	int temps = (int)time(NULL);
 
 	// 	88""Yb    db    88""Yb    db    88     88     888888 88     88 .dP"Y8    db    888888 88  dP"Yb  88b 88 
 	// 	88__dP   dPYb   88__dP   dPYb   88     88     88__   88     88 `Ybo."   dPYb     88   88 dP   Yb 88Yb88 
@@ -241,7 +247,7 @@ SEXP detection_cluster(SEXP nb_point_r,
 
 		// Initialisation des seeds de la fonction de génération de nombre aléatoire avec la date (en seconde depuis 1970)
 		// omp_get_thread_num est utilisé pour être sûr que chaque thread a bien une initialisation du générateur aléatoire différente
-		Seed *seed = unif_aleat_creer_seed();		
+		Seed *seed = unif_aleat_creer_seed(temps);		
 
 		// vecteur de taille nb_mesures_total contenant les mesures, et mises à 0 si la mesure est un controle et à 1 si c'est un cas
 		// le rapport controle/cas est identique par rapport aux données observées

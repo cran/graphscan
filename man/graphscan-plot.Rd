@@ -8,8 +8,8 @@
 \description{plot clusters localisations in a 1D, 2D or 3D space. In 1D, the distribution (in frequencies) of number of events on each position can be ploted.}
 
 \usage{
-graphscan_plot(x,events_series=1,map=NULL,indice="cucala",sphere=TRUE,
-	projection=FALSE,\dots)
+graphscan_plot(x,events_series=1,map=NULL,indice="cucala",
+sphere=TRUE,projection=FALSE,\dots)
 }
 
 \arguments{

@@ -10,7 +10,6 @@
 // ** Auteurs : Robin Loche, Benoit Giron, David Abrial, Lionel Cucala, Myriam Charras-Garrido, Jocelyn De-Goer
 // ** ================================================================================================================
 
-#include <time.h>
 #include <stdlib.h>
 #include "unif_aleat.h"
 #include <Rinternals.h>
@@ -20,19 +19,19 @@
 
 
 
-//Fonction qui génère une nouvelle graîne en utilisant le temps et le numéro de thread
-Seed *unif_aleat_creer_seed(){
+//Fonction qui génère une nouvelle graîne en utilisant le temps (time, temps en secondes depuis 1970) et le numéro de thread
+Seed *unif_aleat_creer_seed(int temps){
     Seed *seed = (Seed*)malloc(sizeof(struct seed_t));
     if(seed == NULL)
         error("\nERROR: unable to allocate the memory for the variable Seed - terminating\n");
     // Initialisation avec le temps et le numéro de thread (+1 car le premier ou le master est 0)
     #ifdef _OPENMP
-        unsigned int base_seed = ((int)time(NULL))^(omp_get_thread_num()+1);
+        unsigned int base_seed = temps + omp_get_thread_num();
     #else
-        unsigned int base_seed = (int)time(NULL);
+        unsigned int base_seed = temps;
     #endif
-    seed->seed_1 = base_seed+1234;
-    seed->seed_2 = base_seed+5678;
+    seed->seed_1 = base_seed + 1234;
+    seed->seed_2 = base_seed + 5678;
     return seed;
 }
 

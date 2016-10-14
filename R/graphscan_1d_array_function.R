@@ -51,6 +51,9 @@
 	  ########################################################### section parallélisée avec snowfall
 	  # nombre maximum de processeurs
 	  nb_proc_max<-.graphscan_get_number_proc()
+	  # Gestion des cas particuliers (notamment mac)
+	  if(is.na(nb_proc_max) || nb_proc_max<1)
+	  	nb_proc_max <- 1
 	  
 	  # nombre de processeur à utiliser
 	  nb_proc<-min(nb_serie_evenement,nb_proc_max)
@@ -230,11 +233,11 @@
 	  
 
 	  # distribution des charges entre processeurs 
-	  list_k<-list(1)
-	  if(nb_serie_evenement>nb_proc)
+	  list_k <- list(1)
+	  if(nb_proc > 1)
 	  {
-	      charge<-as.numeric(cut(1:nb_serie_evenement,breaks=nb_proc))
-	      list_k<-split(1:nb_serie_evenement,f=charge)
+	      charge <- as.numeric(cut(1:nb_serie_evenement, breaks=nb_proc))
+	      list_k <- split(1:nb_serie_evenement, f=charge)
 	  } else if(nb_serie_evenement>1)
 	  {
 	      list_k<-as.list(1:nb_serie_evenement)

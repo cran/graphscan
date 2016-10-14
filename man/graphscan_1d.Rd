@@ -7,9 +7,10 @@
 \title{Creates objects of class 'graphscan' using 1D data.}
 \description{This function produces objects of class graphscan_1d.}
 \usage{
-graphscan_1d(data, format = "fasta", events_series = "all", id = NULL, 
-n_simulation = 199, cluster_analysis = "both", 
-normalisation_factor = NULL, alpha = 0.05, cluster_user_choice = "positive")
+graphscan_1d(data, format = "fasta", events_series = "all",
+id = NULL, n_simulation = 199, cluster_analysis = "both", 
+normalisation_factor = NULL, alpha = 0.05,
+cluster_user_choice = "positive")
 }
 \arguments{
   \item{data}{
@@ -25,7 +26,7 @@ Finally 'data' can be a 'list' of numeric vector containing the positions of eve
   
   \item{n_simulation}{number of simulations (default value 199) used to compute the p-values of clusters in a Monte-Carlo process. The value of 'n_simulation' is stored in the slot 'param' and can be modified by the function 'cluster'.}
 
-  \item{cluster_analysis}{a character string corresponding to "positive", "negative" or "both" (default value) to detect respectively only the positives clusters, only the negatives clusters or both  positives and negatives clusters. The value of 'cluster_analysis' is stored in the slot 'param' and can be modified by the function 'cluster'.}
+  \item{cluster_analysis}{a character string corresponding to "positive", "negative" or "both" \cr (default value) to detect respectively only the positives clusters, only the negatives clusters or both  positives and negatives clusters. The value of 'cluster_analysis' is stored in the slot 'param' and can be modified by the function 'cluster'.}
   
   \item{normalisation_factor}{a list of vectors with a size equal to the number of events series. Each vector contains 2 integers: the minimum and the maximum for the events positions of series of events. 
   
@@ -45,7 +46,8 @@ This function implements a statistical method for detecting clusters in 1D propo
 \item{param}{this slot contains the informations about data and the parameters used to perform the analysis.}
 \item{data}{this slot contains data of events series as a list 'x' of numeric vectors. }
 
-\item{cluster}{this slot contains the results of the analysis. For 1d, three matrices 'cluster_1d_raw', 'cluster_1d' and 'cluster_1d_description' (see 'cluster' function for more details).}
+\item{cluster}{this slot contains the results of the analysis. For 1d, three matrices \cr
+'cluster_1d_raw', 'cluster_1d' and 'cluster_1d_description' \cr (see 'cluster' function for more details).}
 }
 
 \references{
@@ -56,10 +58,11 @@ Cucala, L. 2009. A flexible spatial scan test for case event data, Computational
 \author{Robin Loche, Benoit Giron, David Abrial, Lionel Cucala, Myriam Charras-Garrido, Jocelyn De-Goer.
 Maintainer: David Abrial <graphscan@clermont.inra.fr>}
 
-\seealso{cluster,graphscan_2d}
+\seealso{cluster, graphscan_2d}
 
 \examples{
-# example with 2 fasta format files containing each 2 DNA aligned sequences.
+# example with 2 fasta format files containing each 
+# 2 DNA aligned sequences.
 # the output object contain 6 events series.
 dna_file<-list.files(path=system.file("extdata",package="graphscan"),
  pattern="fna",full.names=TRUE)
